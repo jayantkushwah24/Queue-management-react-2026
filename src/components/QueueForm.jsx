@@ -1,39 +1,62 @@
 import { useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
+import { TextInput } from "./TextInput.jsx";
+import { SelectInput } from "./SelectInput.jsx";
+import "../queue-form.css";
 
 export default function QueueForm({ onAdd }) {
-  const [name, SetName] = useState("");
+  const [name, setName] = useState("");
   const [service, setService] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!name.trim()) newErrors.name = "Customer name is required";
+    if (!service) newErrors.service = "Please select a service";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.trim() || !service.trim()) return;
+    if (!validate()) return;
+
     onAdd({ name, service });
-    SetName("");
+    setName("");
     setService("");
+    setErrors({});
   };
+
   return (
-    <>
-      <form className="queue-form" onSubmit={handleSubmit}>
-        <h2>Add to queue</h2>
-        <input
-          type="text"
-          name="customer-input"
-          value={name}
-          placeholder="Customer name"
-          onChange={(e) => SetName(e.target.value)}
-        />
-      </form>
-      <select value={service} onChange={(e) => setService(e.target.value)}>
-        <option value="">Select Option</option>
-        <option value="consultation">Consultation</option>
-        <option value="payment">Payment</option>
-        <option value="support">Support</option>
-      </select>
-      <button type="submit" onClick={handleSubmit}>
-        {" "}
-        <FaUserPlus /> Add Customer
+    <form className="queue-form" onSubmit={handleSubmit}>
+      <h2>Add to Queue</h2>
+
+      <TextInput
+        label="Customer Name"
+        value={name}
+        placeholder="Enter customer name"
+        onChange={setName}
+        error={errors.name}
+      />
+
+      <SelectInput
+        label="Service Type"
+        value={service}
+        onChange={setService}
+        error={errors.service}
+        options={[
+          { value: "consultation", label: "Consultation" },
+          { value: "payment", label: "Payment" },
+          { value: "support", label: "Support" },
+        ]}
+      />
+
+      <button type="submit">
+        <FaUserPlus />
+        Add Customer
       </button>
-    </>
+    </form>
   );
 }

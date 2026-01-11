@@ -1,0 +1,115 @@
+.queue-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+.queue-container h2 {
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+
+.queue-container.empty {
+  text-align: center;
+  color: #666;
+}
+
+/* List */
+.queue-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Card */
+.queue-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Info */
+.queue-info h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.service {
+  font-size: 13px;
+  color: #555;
+  display: block;
+}
+
+.status {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Status colors */
+.status.waiting {
+  color: #ff9800;
+}
+
+.status.in-progress {
+  color: #007bff;
+}
+
+.status.completed {
+  color: #28a745;
+}
+
+/* Actions */
+.queue-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.queue-actions button {
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btn-secondary:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #b02a37;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .queue-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .queue-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
